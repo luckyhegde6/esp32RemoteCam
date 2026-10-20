@@ -4,6 +4,10 @@ This guide creates a Telegram bot and configures it to communicate with the ESP3
 
 ## 1. Create a bot with BotFather
 
+![Telegram bot setup workflow](../assets/telegram-bot-setup-flow.svg)
+
+
+
 1. Open Telegram and start a conversation with the verified BotFather account: [t.me/BotFather](https://t.me/BotFather).
 2. Send `/newbot`.
 3. Choose a display name, then a unique username that ends in `bot`.
