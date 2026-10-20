@@ -13,11 +13,11 @@ Welcome to the project wiki. This repository targets the AI-Thinker ESP32-CAM (O
 
 ## Diagrams
 
-![AI-Thinker ESP32-CAM pinout](../assets/esp32-cam-ai-thinker-pinout.svg)
+![AI-Thinker ESP32-CAM pinout](https://raw.githubusercontent.com/luckyhegde6/esp32RemoteCam/feature/secure-telegram-camera/assets/esp32-cam-ai-thinker-pinout.svg)
 
-![Static IP setup flow](../assets/static-ip-setup-flow.svg)
+![Static IP setup flow](https://raw.githubusercontent.com/luckyhegde6/esp32RemoteCam/feature/secure-telegram-camera/assets/static-ip-setup-flow.svg)
 
-![Telegram bot setup flow](../assets/telegram-bot-setup-flow.svg)
+![Telegram bot setup flow](https://raw.githubusercontent.com/luckyhegde6/esp32RemoteCam/feature/secure-telegram-camera/assets/telegram-bot-setup-flow.svg)
 
 
 
