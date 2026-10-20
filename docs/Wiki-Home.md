@@ -11,7 +11,15 @@ Welcome to the project wiki. This repository targets the AI-Thinker ESP32-CAM (O
 - [Telegram ESP32-CAM reference tutorial](https://randomnerdtutorials.com/telegram-esp32-cam-photo-arduino/)
 - [Universal Arduino Telegram Bot library](https://github.com/witnessmenow/Universal-Arduino-Telegram-Bot)
 
-## Quick start
+## Diagrams
+
+![AI-Thinker ESP32-CAM pinout](../assets/esp32-cam-ai-thinker-pinout.svg)
+
+![Static IP setup flow](../assets/static-ip-setup-flow.svg)
+
+![Telegram bot setup flow](../assets/telegram-bot-setup-flow.svg)
+
+
 
 1. Confirm your board is AI-Thinker ESP32-CAM and wire it for flashing.
 2. Copy `firmware/esp32cam/config.example.h` to local `config.h`; enter Wi-Fi and Telegram details.
