@@ -12,6 +12,8 @@ AI-Thinker ESP32-CAM firmware with a local MJPEG stream, snapshot/status endpoin
 
 ## Hardware and libraries
 
+The initial CI compile target is pinned to **Arduino-ESP32 core 3.0.7** and uses ArduinoJson 6.21.5 to avoid depending on the latest major library release. The GitHub Actions compile workflow is a compile check only; it does not replace testing on the physical camera.
+
 - AI-Thinker ESP32-CAM with OV2640; PSRAM recommended.
 - Arduino IDE with Espressif ESP32 board package.
 - Board: **AI Thinker ESP32-CAM**.
@@ -29,9 +31,9 @@ AI-Thinker ESP32-CAM firmware with a local MJPEG stream, snapshot/status endpoin
 
 ## Security notes
 
-**This initial firmware is for trusted LAN testing only.** Local HTTP camera endpoints have no user authentication or HTTPS. Do not expose port 80 to the public internet or forward it from your router. For remote live viewing, use a VPN such as Tailscale on a gateway device (the ESP32-CAM itself generally cannot run the Tailscale client), or an authenticated HTTPS reverse proxy. Telegram chat authorization protects bot commands only; it does not protect the web server.
+**This initial firmware is for trusted LAN testing only.** Local HTTP camera endpoints have no user authentication or HTTPS. Do not expose port 80 to the public internet or forward it from your router. For remote live viewing without an always-on computer, the best option is a **VPN server built into your router** (for example, WireGuard or OpenVPN if your router supports it). Connect your phone/laptop to that VPN, then open the camera's private LAN IP. If the router has no VPN server, a direct VPN connection to this ESP32-CAM is not supported by the normal Arduino firmware; you will need a gateway device or a separately designed authenticated relay. Do not forward the camera's HTTP port to the public internet. Telegram chat authorization protects bot commands only; it does not protect the web server.
 
-The `/photo` command uploads a captured JPEG using the library's binary-photo API. Test with your installed library version; certificate updates and Telegram API compatibility may require maintenance.
+The `/photo` command uploads a captured JPEG using the library's binary-photo API. TLS uses the library-provided `TELEGRAM_CERTIFICATE_ROOT` and synchronizes time with NTP before Telegram requests.
 
 GPIO 4 drives the onboard flash LED and is also associated with the microSD interface. Do not use the flash and microSD simultaneously without checking the board wiring.
 
