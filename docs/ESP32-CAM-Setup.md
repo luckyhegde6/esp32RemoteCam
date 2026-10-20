@@ -44,6 +44,10 @@ To upload: connect GPIO0 to GND, reset/power-cycle, upload, then disconnect GPIO
 
 ## 2. AI-Thinker pinout and camera wiring
 
+![Original simplified AI-Thinker ESP32-CAM pinout diagram](../assets/esp32-cam-ai-thinker-pinout.svg)
+
+
+
 **Original pinout diagram and schematic:** [Random Nerd Tutorials — ESP32-CAM AI-Thinker pinout](https://randomnerdtutorials.com/esp32-cam-ai-thinker-pinout/). The article provides the pinout figure, power-pin details, camera mapping, SD interface mapping, and a schematic source.
 
 The OV2640 camera GPIO mapping used in this repository is:
