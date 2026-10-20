@@ -30,6 +30,8 @@ static camera_config_t cameraConfig = {
 WiFiClientSecure telegramClient;
 UniversalTelegramBot bot(TELEGRAM_BOT_TOKEN, telegramClient);
 httpd_handle_t cameraHttpd = nullptr;
+static camera_fb_t *telegramPhotoFrame = nullptr;
+static size_t telegramPhotoIndex = 0;
 unsigned long lastBotPoll = 0;
 unsigned long lastWifiCheck = 0;
 const uint32_t BOT_POLL_MS = 1200;
@@ -109,6 +111,30 @@ static bool startCameraServer() {
   httpd_register_uri_handler(cameraHttpd, &capture);
   httpd_register_uri_handler(cameraHttpd, &stream);
   return true;
+}
+
+static bool photoDataAvailable() {
+  return telegramPhotoFrame != nullptr && telegramPhotoIndex < telegramPhotoFrame->len;
+}
+static byte photoNextByte() {
+  return telegramPhotoFrame->buf[telegramPhotoIndex++];
+}
+
+static bool sendTelegramPhoto(const String &chatId) {
+  telegramPhotoFrame = esp_camera_fb_get();
+  if (!telegramPhotoFrame) {
+    bot.sendMessage(chatId, "Camera capture failed.", "");
+    return false;
+  }
+  telegramPhotoIndex = 0;
+  String response = bot.sendPhotoByBinary(chatId, "image/jpeg", telegramPhotoFrame->len,
+                                          photoDataAvailable, photoNextByte, nullptr, nullptr);
+  bool ok = bot.checkForOkResponse(response);
+  esp_camera_fb_return(telegramPhotoFrame);
+  telegramPhotoFrame = nullptr;
+  telegramPhotoIndex = 0;
+  if (!ok) bot.sendMessage(chatId, "Telegram photo upload failed. Check TLS certificate and bot connectivity.", "");
+  return ok;
 }
 
 static bool authorized(const String &chatId) {
