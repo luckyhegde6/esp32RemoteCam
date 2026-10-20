@@ -25,7 +25,7 @@ jobs:
       - name: Install libraries
         run: |
           arduino-cli lib install "UniversalTelegramBot"
-          arduino-cli lib install "ArduinoJson"
+          arduino-cli lib install "ArduinoJson@6.21.5"
       - name: Prepare compile-only configuration
         run: cp firmware/esp32cam/config.example.h firmware/esp32cam/config.h
       - name: Compile AI Thinker ESP32-CAM
