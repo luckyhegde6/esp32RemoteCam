@@ -29,7 +29,3 @@
 #define DNS2_2 8
 #define DNS2_3 8
 #define DNS2_4 8
-
-// Replace with the correct trusted PEM root certificate for api.telegram.org.
-// Do not use WiFiClientSecure::setInsecure() in production.
-#define TELEGRAM_CERTIFICATE_ROOT "REPLACE_WITH_VALID_TELEGRAM_ROOT_CA_PEM"
