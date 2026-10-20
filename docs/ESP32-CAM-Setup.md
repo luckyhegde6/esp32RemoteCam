@@ -112,6 +112,10 @@ Open `firmware/esp32cam/esp32cam.ino` in Arduino IDE, compile, flash, then open 
 
 ## 5. Static/fixed LAN IP
 
+![Stable LAN IP setup flow](../assets/static-ip-setup-flow.svg)
+
+
+
 The project's sketch supports `USE_STATIC_IP`, based on the `WiFi.config()` approach documented by Random Nerd Tutorials.
 
 **Recommended option: DHCP reservation.** In the router's DHCP/Address Reservation page, reserve the same private IP for the ESP32-CAM's Wi-Fi MAC address. This normally provides stable addressing while keeping network configuration centralized.
