@@ -1,0 +1,32 @@
+name: Arduino compile check
+
+on:
+  push:
+    paths:
+      - "firmware/esp32cam/**"
+      - ".github/workflows/arduino-compile.yml"
+  pull_request:
+    paths:
+      - "firmware/esp32cam/**"
+      - ".github/workflows/arduino-compile.yml"
+  workflow_dispatch:
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: arduino/setup-arduino-cli@v2
+      - name: Install ESP32 platform
+        run: |
+          arduino-cli config init
+          arduino-cli core update-index --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+          arduino-cli core install esp32:esp32@3.0.7 --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+      - name: Install libraries
+        run: |
+          arduino-cli lib install "UniversalTelegramBot"
+          arduino-cli lib install "ArduinoJson"
+      - name: Prepare compile-only configuration
+        run: cp firmware/esp32cam/config.example.h firmware/esp32cam/config.h
+      - name: Compile AI Thinker ESP32-CAM
+        run: arduino-cli compile --fqbn esp32:esp32:esp32cam firmware/esp32cam
